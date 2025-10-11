@@ -1,23 +1,34 @@
+// src/main.tsx
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import LoginPage from './pages/LoginPage.tsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+import LoginPage from './pages/LoginPage.tsx';
 import MainPage from './pages/MainPage.tsx';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext.tsx';
+import { ProtectedRoute } from './components/ProtectedRoute.tsx';
 
 const router = createBrowserRouter([
   {
-    path: '/', //raiz do site
-    element: <MainPage />,
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <MainPage />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: '/login', 
-    element: <LoginPage />, 
+    path: '/login',
+    element: <LoginPage />,
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
