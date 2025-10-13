@@ -29,7 +29,7 @@ export function ItemList({ selectedId }: ItemListProps) {
         fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
             .then(res => res.json())
             .then(responseObject => {
-                setItems(responseObject.items);
+                setItems(responseObject.items || []);
                 setLoading(false);
             })
             .catch(error => {
