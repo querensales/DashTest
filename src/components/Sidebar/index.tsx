@@ -15,11 +15,11 @@ interface SubMenu {
 export default function Sidebar() {
     const [menus, setMenus] = useState<Menu[]>([]);
     const [loading, setLoading] = useState(true);
-    
+
     useEffect(() => {
         fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
             .then(response => response.json())
-            .then(receivedMenus=> {
+            .then(receivedMenus => {
                 setMenus(receivedMenus);
                 setLoading(false);
             })
@@ -28,18 +28,18 @@ export default function Sidebar() {
                 setLoading(false);
             });
     }, []);
-    
+
     if (loading) {
         return <aside className={styles.sidebar}>Carregando menus...</aside>;
     }
 
-    return(
+    return (
         <aside className={styles.sidebar}>
             <nav> <h1>
                 Dados da API
             </h1>
                 <ul>
-                    {menus.map(menu =>(
+                    {menus.map(menu => (
                         <li key={menu.id}>
                             <span>{menu.name}</span>
                             {menu.subMenus && (
@@ -51,7 +51,7 @@ export default function Sidebar() {
                                     ))}
                                 </ul>
                             )}
-                            </li>
+                        </li>
                     ))}
                 </ul>
             </nav>
