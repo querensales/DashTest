@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 import styles from './MainPage.module.css';
 import { Sidebar } from '../../components/Sidebar';
-import { useState } from 'react';
+import { ItemList } from '../../components/ItemList';
+
 
 export function MainPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
@@ -13,7 +16,7 @@ export function MainPage() {
           Componente 1 (Logout) e 3 (Arquivar)
         </header>
         <section className={styles.listSection}>
-          Componente 4 (Lista)
+           <ItemList selectedId={selectedSubMenuId} />
         </section>
       </main>
     </div>
