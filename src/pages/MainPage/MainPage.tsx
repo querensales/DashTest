@@ -4,9 +4,6 @@ import { useState } from 'react';
 
 export function MainPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
-
-  console.log('SubMenu selecionado na MainPage:', selectedSubMenuId);
-
   return (
     <div className={styles.mainpageLayout}>
       <Sidebar onSubMenuClick={setSelectedSubMenuId} selectedId={selectedSubMenuId} />
