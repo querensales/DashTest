@@ -12,7 +12,11 @@ interface SubMenu {
     name: string;
 }
 
-export default function Sidebar() {
+interface SidebarProps {
+    onSubMenuSelect: (id: number) => void;
+}
+
+export default function Sidebar({ onSubMenuSelect }: SidebarProps) {
     const [menus, setMenus] = useState<Menu[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -46,7 +50,7 @@ export default function Sidebar() {
                                 <ul>
                                     {menu.subMenus.map(subMenu => (
                                         <li key={subMenu.id}>
-                                            <a href="#">{subMenu.name}</a>
+                                            <button onClick={() => onSubMenuSelect(subMenu.id)}>{subMenu.name}</button>
                                         </li>
                                     ))}
                                 </ul>
