@@ -4,11 +4,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import LoginPage from './pages/LoginPage.tsx';
-import MainPage from './pages/MainPage.tsx';
+import LoginPage from './pages/LoginPage/LoginPage.tsx';
+import MainPage from './pages/MainPage/MainPage.tsx';
 
 import { AuthProvider } from './contexts/AuthContext.tsx';
 import { ProtectedRoute } from './components/ProtectedRoute.tsx';
+
+import './index.css';
 
 const router = createBrowserRouter([
   {
