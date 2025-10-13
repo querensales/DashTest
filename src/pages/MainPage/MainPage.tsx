@@ -1,5 +1,5 @@
 import styles from './MainPage.module.css';
-import Sidebar from '../../components/Sidebar';
+import { Sidebar } from '../../components/Sidebar';
 import { useState } from 'react';
 
 export function MainPage() {
@@ -9,7 +9,7 @@ export function MainPage() {
 
   return (
     <div className={styles.mainpageLayout}>
-      <Sidebar onSubMenuSelect={setSelectedSubMenuId} />
+      <Sidebar onSubMenuClick={setSelectedSubMenuId} selectedId={selectedSubMenuId} />
 
       <main className={styles.contentArea}>
         <header className={styles.header}>

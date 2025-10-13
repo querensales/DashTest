@@ -13,10 +13,11 @@ interface SubMenu {
 }
 
 interface SidebarProps {
-    onSubMenuSelect: (id: number) => void;
+    onSubMenuClick: (id: number) => void;
+    selectedId: number | null;
 }
 
-export default function Sidebar({ onSubMenuSelect }: SidebarProps) {
+export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
     const [menus, setMenus] = useState<Menu[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -39,20 +40,26 @@ export default function Sidebar({ onSubMenuSelect }: SidebarProps) {
 
     return (
         <aside className={styles.sidebar}>
-            <nav> <h1>
-                Dados da API
-            </h1>
+            <nav>
                 <ul>
                     {menus.map(menu => (
                         <li key={menu.id}>
                             <span>{menu.name}</span>
                             {menu.subMenus && (
                                 <ul>
-                                    {menu.subMenus.map(subMenu => (
-                                        <li key={subMenu.id}>
-                                            <button onClick={() => onSubMenuSelect(subMenu.id)}>{subMenu.name}</button>
-                                        </li>
-                                    ))}
+                                    {menu.subMenus.map(subMenu => {
+                                        const isSelected = selectedId === subMenu.id;
+
+                                        return (
+                                            <li key={subMenu.id}>
+                                                <button
+                                                    className={isSelected ? styles.selected : ''}
+                                                    onClick={() => onSubMenuClick(subMenu.id)}>
+                                                    {subMenu.name}
+                                                </button>
+                                            </li>
+                                        );
+                                    })}
                                 </ul>
                             )}
                         </li>
@@ -60,5 +67,5 @@ export default function Sidebar({ onSubMenuSelect }: SidebarProps) {
                 </ul>
             </nav>
         </aside>
-    )
+    );
 }
