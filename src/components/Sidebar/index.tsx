@@ -3,13 +3,13 @@ import styles from './Sidebar.module.css';
 
 interface Menu {
     id: number;
-    label: string;
+    name: string;
     subMenus: SubMenu[];
 }
 
 interface SubMenu {
     id: number;
-    label: string;
+    name: string;
 }
 
 export default function Sidebar() {
@@ -20,6 +20,7 @@ export default function Sidebar() {
         fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
             .then(response => response.json())
             .then(receivedMenus=> {
+                 console.log('Dados recebidos da API:', receivedMenus); 
                 setMenus(receivedMenus);
                 setLoading(false);
             })
@@ -28,6 +29,7 @@ export default function Sidebar() {
                 setLoading(false);
             });
     }, []);
+     console.log('Estado atual dos menus:', menus);
 
     if (loading) {
         return <aside className={styles.sidebar}>Carregando menus...</aside>;
@@ -35,16 +37,18 @@ export default function Sidebar() {
 
     return(
         <aside className={styles.sidebar}>
-            <nav>
+            <nav> <h1>
+                Dados da API
+            </h1>
                 <ul>
                     {menus.map(menu =>(
                         <li key={menu.id}>
-                            <span>{menu.label}</span>
+                            <span>{menu.name}</span>
                             {menu.subMenus && (
                                 <ul>
                                     {menu.subMenus.map(subMenu => (
                                         <li key={subMenu.id}>
-                                            <a href="#">{subMenu.label}</a>
+                                            <a href="#">{subMenu.name}</a>
                                         </li>
                                     ))}
                                 </ul>

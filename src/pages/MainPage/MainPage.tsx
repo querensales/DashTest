@@ -1,12 +1,10 @@
 import styles from './MainPage.module.css';
+import Sidebar from '../../components/Sidebar';
 
 export function MainPage() {
   return (
     <div className={styles.mainpageLayout}> 
-      <aside className={styles.sidebar}>
-        Componente 2 (Menu)
-      </aside>
-      
+      <Sidebar />
       <main className={styles.contentArea}>
         <header className={styles.header}>
           Componente 1 (Logout) e 3 (Arquivar)
