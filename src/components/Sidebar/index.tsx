@@ -33,5 +33,26 @@ export default function Sidebar() {
         return <aside className={styles.sidebar}>Carregando menus...</aside>;
     }
 
-
+    return(
+        <aside className={styles.sidebar}>
+            <nav>
+                <ul>
+                    {menus.map(menu =>(
+                        <li key={menu.id}>
+                            <span>{menu.label}</span>
+                            {menu.subMenus && (
+                                <ul>
+                                    {menu.subMenus.map(subMenu => (
+                                        <li key={subMenu.id}>
+                                            <a href="#">{subMenu.label}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                            </li>
+                    ))}
+                </ul>
+            </nav>
+        </aside>
+    )
 }
