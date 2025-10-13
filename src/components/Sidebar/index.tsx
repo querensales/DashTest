@@ -20,7 +20,6 @@ export default function Sidebar() {
         fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
             .then(response => response.json())
             .then(receivedMenus=> {
-                 console.log('Dados recebidos da API:', receivedMenus); 
                 setMenus(receivedMenus);
                 setLoading(false);
             })
@@ -29,8 +28,7 @@ export default function Sidebar() {
                 setLoading(false);
             });
     }, []);
-     console.log('Estado atual dos menus:', menus);
-
+    
     if (loading) {
         return <aside className={styles.sidebar}>Carregando menus...</aside>;
     }
