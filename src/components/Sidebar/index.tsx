@@ -17,3 +17,15 @@ export default function Sidebar(){
     const [loading, setLoading] = useState(true);
   
 }
+
+useEffect(() => {
+    fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
+    .then(response => response.json())
+    .then(data => {
+      setMenus(data);
+      setLoading(false);
+    })
+
+
+
+})
