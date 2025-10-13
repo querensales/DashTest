@@ -9,3 +9,24 @@
     border-right: 1px solid #dcdcdc;
     padding: 1rem;
 }
+
+.contentArea{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.header{
+    height: 60px;
+    background-color:#ffffff;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.listSection{
+    flex-grow: 1;
+    padding: 1rem;
+    overflow-y: auto;
+}
