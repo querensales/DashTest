@@ -7,6 +7,6 @@
 
 body, #root {
   width: 100%;
-  height: 100vh; /* Ocupar 100% da altura da tela */
-  background-color: #f0f2f5; /* Um cinza claro para o fundo */
+  height: 100vh; 
+  background-color: #f0f2f5;
 }
