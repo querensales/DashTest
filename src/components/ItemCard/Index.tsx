@@ -1,5 +1,5 @@
 import type { Item } from '../../types';
-import styles from './ItemCard.module.css';
+import styles from './itemCard.module.css';
 
 interface ItemCardProps {
     item: Item;
