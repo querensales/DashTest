@@ -5,14 +5,13 @@ interface ItemCardProps {
     item: Item;
 }
 
-export default function ItemCard({ item }: { item: ItemCardProps }) {
+export function ItemCard({ item }: ItemCardProps) {
     return (
-        <section>
-            <div className={styles.cardContainer}>
-                <div className={styles.ownerCircle}>
-                    {item.owner}
-                </div>
+        <div className={styles.cardContainer}>
+            <div className={styles.ownerCircle}>
+                {item.owner}
             </div>
+            
             <div className={styles.mainContent}>
                 <span className={styles.name}>{item.name}</span>
                 <p className={styles.subject}>{item.subject}</p>
@@ -25,6 +24,6 @@ export default function ItemCard({ item }: { item: ItemCardProps }) {
                     </div>
                 ))}
             </div>
-        </section>
-    )
+        </div>
+    );
 }
