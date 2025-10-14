@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './ItemList.module.css';
-import type { Item } from '../../types'; 
+import type { Item } from '../../types';
 
 interface ItemListProps {
     selectedId: number | null;
