@@ -7,3 +7,48 @@
   gap: 1rem;
 }
 
+.ownerCircle, .userCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+}
+
+.ownerCircle {
+  min-width: 48px;
+  height: 48px;
+  background-color: #096dd9;
+  font-size: 1.2rem;
+}
+
+.mainContent {
+  flex-grow: 1;
+}
+
+.subject {
+  color: #666;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+
+.usersContainer {
+  display: flex;
+}
+
+
+.userCircle {
+  width: 32px;
+  height: 32px;
+  background-color: #00a884;
+  border: 2px solid #fff;
+  margin-left: -7px;
+}
+
+.userCircle:first-child {
+  margin-left: 0;
+}
