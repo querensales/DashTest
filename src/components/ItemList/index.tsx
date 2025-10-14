@@ -31,6 +31,7 @@ export function ItemList({ selectedId }: ItemListProps) {
             .then(responseObject => {
                 setItems(responseObject.items || []);
                 setLoading(false);
+                console.log("items da api" ,responseObject);
             })
             .catch(error => {
                 console.error("Erro ao buscar os itens:", error);

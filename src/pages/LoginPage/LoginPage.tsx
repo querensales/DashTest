@@ -13,7 +13,7 @@ export default function LoginPage() {
         event.preventDefault();
         const isLoginSuccessful = login(user, pass);
         if (isLoginSuccessful) {
-            navigate('/'); // login com sucesso
+            navigate('/');
         } else {
             alert('Informações inválidas!');
         }
