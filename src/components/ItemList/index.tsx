@@ -8,10 +8,8 @@ interface ItemListProps {
 }
 
 export function ItemList({ selectedId }: ItemListProps) {
-
     const [items, setItems] = useState<Item[]>([]);
     const [loading, setLoading] = useState(false);
-
 
     useEffect(() => {
         if (!selectedId) {
@@ -23,9 +21,8 @@ export function ItemList({ selectedId }: ItemListProps) {
         fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
             .then(res => res.json())
             .then(responseObject => {
-                setItems(responseObject.items || []);
+                setItems(responseObject.subMenuItems || []);
                 setLoading(false);
-                console.log("items da api", responseObject);
             })
             .catch(error => {
                 console.error("Erro ao buscar os itens:", error);
@@ -46,9 +43,9 @@ export function ItemList({ selectedId }: ItemListProps) {
         <div className={styles.container}>
             {items.length > 0 ? (
                 <div>
-                    {items.map(item => (
-                        <ItemCard key={item.id} item={item} />
-                    ))}
+                    {items.map(item => {
+                        return <ItemCard key={item.id} item={item} />;
+                    })}
                 </div>
             ) : (
                 <p>Nenhum item encontrado.</p>
