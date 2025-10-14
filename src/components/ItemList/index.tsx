@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from './ItemList.module.css';
 import type { Item } from '../../types';
+import ItemCard from '../ItemCard';
 
 interface ItemListProps {
     selectedId: number | null;
@@ -24,7 +25,7 @@ export function ItemList({ selectedId }: ItemListProps) {
             .then(responseObject => {
                 setItems(responseObject.items || []);
                 setLoading(false);
-                console.log("items da api" ,responseObject);
+                console.log("items da api", responseObject);
             })
             .catch(error => {
                 console.error("Erro ao buscar os itens:", error);
@@ -44,11 +45,11 @@ export function ItemList({ selectedId }: ItemListProps) {
     return (
         <div className={styles.container}>
             {items.length > 0 ? (
-                <ul>
+                <div>
                     {items.map(item => (
-                        <li key={item.id}>{item.name} - {item.subject}</li>
+                        <ItemCard key={item.id} item={item} />
                     ))}
-                </ul>
+                </div>
             ) : (
                 <p>Nenhum item encontrado.</p>
             )}

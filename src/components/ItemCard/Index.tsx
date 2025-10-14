@@ -3,7 +3,6 @@ import styles from './ItemCard.module.css';
 
 interface ItemCardProps {
     item: Item;
-    owner: string;
 }
 
 export default function ItemCard({ item }: { item: ItemCardProps }) {
