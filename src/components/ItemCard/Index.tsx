@@ -22,10 +22,6 @@ export function ItemCard({ item }: ItemCardProps) {
                 </div>
             )}
 
-            <div className={styles.ownerCircle}>
-                {item.owner}
-            </div>
-
             <div className={styles.mainContent}>
                 <span className={styles.name}>{item.name}</span>
                 <p className={styles.subject}>{item.subject}</p>
