@@ -10,13 +10,13 @@ interface ItemListProps {
 export function ItemList({ selectedId }: ItemListProps) {
     const [items, setItems] = useState<Item[]>([]);
     const [loading, setLoading] = useState(false);
+    const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
     useEffect(() => {
         if (!selectedId) {
             setItems([]);
             return;
         }
-
         setLoading(true);
         fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
             .then(res => res.json())
@@ -28,8 +28,16 @@ export function ItemList({ selectedId }: ItemListProps) {
                 console.error("Erro ao buscar os itens:", error);
                 setLoading(false);
             });
-
     }, [selectedId]);
+
+    const handleSelectItem = (itemId: number) => {
+        setSelectedItems(prevSelected => {
+            if (prevSelected.includes(itemId)) {
+                return prevSelected.filter(id => id !== itemId);
+            }
+            return [...prevSelected, itemId];
+        });
+    };
 
     if (!selectedId) {
         return <div className={styles.container}>Selecione um item no menu para ver os resultados.</div>;
@@ -39,12 +47,23 @@ export function ItemList({ selectedId }: ItemListProps) {
         return <div className={styles.container}>Carregando itens...</div>;
     }
 
+    const isSelectionMode = selectedItems.length > 0;
+
     return (
         <div className={styles.container}>
             {items.length > 0 ? (
                 <div>
                     {items.map(item => {
-                        return <ItemCard key={item.id} item={item} />;
+                        const isSelected = selectedItems.includes(item.id);
+                        return (
+                            <ItemCard
+                                key={item.id}
+                                item={item}
+                                isSelected={isSelected}
+                                isSelectionMode={isSelectionMode}
+                                onSelect={handleSelectItem}
+                            />
+                        );
                     })}
                 </div>
             ) : (
