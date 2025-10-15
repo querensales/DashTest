@@ -1,24 +1,15 @@
-import { useEffect, useState } from 'react';
 import styles from './ItemList.module.css';
 import type { Item } from '../../types';
 import { ItemCard } from '../ItemCard';
 
 interface ItemListProps {
-    selectedId: number | null;
+  loading: boolean;
+  items: Item[];
+  selectedItems: number[];
+  onSelectItem: (id: number) => void;
 }
 
-export function ItemList({ selectedId }: ItemListProps) {
-    const [items, setItems] = useState<Item[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
-
-
-    
-
-    if (!selectedId) {
-        return <div className={styles.container}>Selecione um item no menu para ver os resultados.</div>;
-    }
+export function ItemList({ loading, items, selectedItems, onSelectItem }: ItemListProps) {
 
     if (loading) {
         return <div className={styles.container}>Carregando itens...</div>;
@@ -38,7 +29,7 @@ export function ItemList({ selectedId }: ItemListProps) {
                                 item={item}
                                 isSelected={isSelected}
                                 isSelectionMode={isSelectionMode}
-                                onSelect={handleSelectItem}
+                                onSelect={onSelectItem}
                             />
                         );
                     })}

@@ -15,6 +15,7 @@ useEffect(() => {
     setItems([]);
     return;
   }
+   setSelectedItems([]);
   setLoading(true);
   fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
     .then(res => res.json())
@@ -57,7 +58,12 @@ export function MainPage() {
           Componente 1 (Logout) e 3 (Arquivar)
         </header>
         <section className={styles.listSection}>
-          <ItemList selectedId={selectedSubMenuId} />
+          <ItemList
+            loading={loading}
+            items={items}
+            selectedItems={selectedItems}
+            onSelectItem={handleSelectItem}
+          />
         </section>
       </main>
     </div>
