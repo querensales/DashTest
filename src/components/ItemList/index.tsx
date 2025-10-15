@@ -12,23 +12,7 @@ export function ItemList({ selectedId }: ItemListProps) {
     const [loading, setLoading] = useState(false);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
-    useEffect(() => {
-        if (!selectedId) {
-            setItems([]);
-            return;
-        }
-        setLoading(true);
-        fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
-            .then(res => res.json())
-            .then(responseObject => {
-                setItems(responseObject.subMenuItems || []);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error("Erro ao buscar os itens:", error);
-                setLoading(false);
-            });
-    }, [selectedId]);
+
 
     const handleSelectItem = (itemId: number) => {
         setSelectedItems(prevSelected => {

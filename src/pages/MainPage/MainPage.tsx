@@ -10,6 +10,24 @@ import type { Item } from '../../types';
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
 
+      useEffect(() => {
+        if (!selectedSubMenuId) {
+            setItems([]);
+            return;
+        }
+        setLoading(true);
+        fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
+            .then(res => res.json())
+            .then(responseObject => {
+                setItems(responseObject.subMenuItems || []);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Erro ao buscar os itens:", error);
+                setLoading(false);
+            });
+    }, [selectedSubMenuId]);
+
 export function MainPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
   return (
