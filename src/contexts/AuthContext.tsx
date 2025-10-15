@@ -1,8 +1,11 @@
-import { createContext, useState, useContext, type ReactNode } from 'react';
+import { createContext, useState, useContext, type ReactNode, useCallback } from 'react';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  login: (user: string, pass: string) => boolean}
+  login: (user: string, pass: string) => boolean
+  logout: () => void;
+}
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -11,16 +14,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   // A lógica de login
-  const login = (user: string, pass:string) => {
+  const login = useCallback((user: string, pass: string) => {
     if (user === 'Admin' && pass === 'Admin') {
       setIsAuthenticated(true);
       return true;
     }
     return false;
-  };
+  }, []);
+
+  const logout = useCallback(() => {
+    setIsAuthenticated(false);
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login }}>
+   <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
