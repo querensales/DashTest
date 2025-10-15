@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import styles from './MainPage.module.css';
+
 import { Sidebar } from '../../components/Sidebar';
 import { ItemList } from '../../components/ItemList';
+import { Header } from '../../components/Header';
 import type { Item } from '../../types';
 
 export function MainPage() {
@@ -51,12 +53,11 @@ export function MainPage() {
       <Sidebar onSubMenuClick={setSelectedSubMenuId} selectedId={selectedSubMenuId} />
 
       <main className={styles.contentArea}>
-        <header className={styles.header}>
-          <button>Logout</button>
-          {selectedItems.length > 0 && (
-            <button onClick={archiveItems}>Arquivar</button>
-          )}
-        </header>
+        <Header
+          selectedItemsCount={selectedItems.length}
+          onArchive={archiveItems}
+        />
+
         <section className={styles.listSection}>
           <ItemList
             loading={loading}
