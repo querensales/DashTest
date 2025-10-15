@@ -1,12 +1,40 @@
+/* src/index.css */
+
+/* Definição das variáveis para o tema CLARO */
+body.light {
+  --background-primary: #f0f2f5;
+  --background-secondary: #ffffff; 
+  --text-primary: #343a40; 
+  --text-secondary: #6c757d; 
+  --border-color: #dee2e6; 
+  --accent-primary: #007bff;
+  --accent-light: #e6f0ff;
+  --accent-text-on-primary: #ffffff;
+}
+
+/* Definição das variáveis para o tema ESCURO  */
+body.dark {
+  --background-primary: #212529;
+  --background-secondary: #343a40;
+  --text-primary: #e9ecef; 
+  --text-secondary: #adb5bd; 
+  --border-color: #495057; 
+  --accent-primary: #007bff; 
+  --accent-light: #0d366d; 
+  --accent-text-on-primary: #ffffff;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 body, #root {
   width: 100%;
-  height: 100vh; 
-  background-color: #f0f2f5;
+  height: 100vh;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
 }
