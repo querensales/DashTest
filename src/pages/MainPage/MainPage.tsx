@@ -1,52 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './MainPage.module.css';
 import { Sidebar } from '../../components/Sidebar';
 import { ItemList } from '../../components/ItemList';
 import type { Item } from '../../types';
 
-const [items, setItems] = useState<Item[]>([]);
-const [loading, setLoading] = useState(false);
-const [selectedItems, setSelectedItems] = useState<number[]>([]);
-const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
-
-useEffect(() => {
-  if (!selectedSubMenuId) {
-    setItems([]);
-    return;
-  }
-   setSelectedItems([]);
-  setLoading(true);
-  fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedId}`)
-    .then(res => res.json())
-    .then(responseObject => {
-      setItems(responseObject.subMenuItems || []);
-      setLoading(false);
-    })
-    .catch(error => {
-      console.error("Erro ao buscar os itens:", error);
-      setLoading(false);
-    });
-}, [selectedSubMenuId]);
-
-const handleSelectItem = (itemId: number) => {
-  setSelectedItems(prevSelected => {
-    if (prevSelected.includes(itemId)) {
-      return prevSelected.filter(id => id !== itemId);
-    }
-    return [...prevSelected, itemId];
-  });
-};
-
-const archiveItems = () => {
-  const remainingItems = items.filter(item => !selectedItems.includes(item.id));
-  setItems(remainingItems);
-  setSelectedItems([])
-}
-
 export function MainPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
+  const [items, setItems] = useState<Item[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
+  useEffect(() => {
+    if (!selectedSubMenuId) {
+      setItems([]);
+      return;
+    }
+    setSelectedItems([]);
+    setLoading(true);
+    fetch(`https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/items/${selectedSubMenuId}`)
+      .then(res => res.json())
+      .then(responseObject => {
+        setItems(responseObject.subMenuItems || []);
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Erro ao buscar os itens:", error);
+        setLoading(false);
+      });
+  }, [selectedSubMenuId]);
+
+  const handleSelectItem = (itemId: number) => {
+    setSelectedItems(prevSelected => {
+      if (prevSelected.includes(itemId)) {
+        return prevSelected.filter(id => id !== itemId);
+      }
+      return [...prevSelected, itemId];
+    });
+  };
+
+  const archiveItems = () => {
+    const remainingItems = items.filter(item => !selectedItems.includes(item.id));
+    setItems(remainingItems);
+    setSelectedItems([]);
+  };
 
   return (
     <div className={styles.mainpageLayout}>
@@ -55,7 +52,10 @@ export function MainPage() {
 
       <main className={styles.contentArea}>
         <header className={styles.header}>
-          Componente 1 (Logout) e 3 (Arquivar)
+          <button>Logout</button>
+          {selectedItems.length > 0 && (
+            <button onClick={archiveItems}>Arquivar</button>
+          )}
         </header>
         <section className={styles.listSection}>
           <ItemList
