@@ -14,14 +14,7 @@ export function ItemList({ selectedId }: ItemListProps) {
 
 
 
-    const handleSelectItem = (itemId: number) => {
-        setSelectedItems(prevSelected => {
-            if (prevSelected.includes(itemId)) {
-                return prevSelected.filter(id => id !== itemId);
-            }
-            return [...prevSelected, itemId];
-        });
-    };
+    
 
     if (!selectedId) {
         return <div className={styles.container}>Selecione um item no menu para ver os resultados.</div>;

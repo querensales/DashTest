@@ -28,6 +28,15 @@ import type { Item } from '../../types';
             });
     }, [selectedSubMenuId]);
 
+    const handleSelectItem = (itemId: number) => {
+        setSelectedItems(prevSelected => {
+            if (prevSelected.includes(itemId)) {
+                return prevSelected.filter(id => id !== itemId);
+            }
+            return [...prevSelected, itemId];
+        });
+    };
+
 export function MainPage() {
   const [selectedSubMenuId, setSelectedSubMenuId] = useState<number | null>(null);
   return (
