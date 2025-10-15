@@ -2,6 +2,7 @@ import styles from './ItemList.module.css';
 import type { Item } from '../../types';
 import { ItemCard } from '../ItemCard';
 
+
 interface ItemListProps {
   loading: boolean;
   items: Item[];
