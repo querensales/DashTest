@@ -1,0 +1,37 @@
+.header {
+    height: 60px;
+    padding: 1rem;
+    background-color: var(--background-secondary);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header button {
+    background-color: var(--accent-primary);
+    color: var(--accent-text-on-primary);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.header button:hover:not(:disabled) {
+    opacity: 0.9;
+}
+
+.header button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+    color: var(--text-secondary);
+    opacity: 0.7; 
+}
