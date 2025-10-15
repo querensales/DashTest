@@ -2,6 +2,7 @@ import styles from './Header.module.css';
 import { useTheme } from '../../contexts/ChangeTheme'; 
 import { useTranslation } from 'react-i18next'; 
 import i18n from '../../i18n';
+import { UserMenu } from '../UserMenu';
 
 interface HeaderProps {
     selectedItemsCount: number;
@@ -37,6 +38,8 @@ const changeLanguage = (lng: 'pt' | 'en') => {
                 <button onClick={toggleTheme}>
                     {theme === 'light' ? t('Mudar tema') : t('Mudar tema')}
                 </button>
+
+                <UserMenu />
             </div>
         </header>
     );

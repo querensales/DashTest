@@ -1,0 +1,40 @@
+.menuContainer {
+  position: relative;
+}
+
+.menuContainer .userButton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color:#00a884;
+  color: var(--accent-text-on-primary);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 50px; 
+  right: 0;
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.5rem;
+  z-index: 10;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dropdownMenu button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: center;
+}
