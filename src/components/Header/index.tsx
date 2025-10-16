@@ -24,30 +24,27 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
             <div className={styles.leftSection}>
                 <button className={styles.hamburgerButton} onClick={onMenuClick}>
                     ☰
-
-                    {hasSelection && (
-                        <>
-                            <button onClick={onArchive}>
-                                {t('archive')}
-                            </button>
-                            <span>{t('selected_items', { count: selectedItemsCount })}</span>
-                        </>
-                    )}
                 </button>
 
-
-
+                {hasSelection && (
+                    <>
+                        <button onClick={onArchive}>
+                            {t('archive')}
+                        </button>
+                        <span>{t('selected_items', { count: selectedItemsCount })}</span>
+                    </>
+                )}
             </div>
+
             <div className={styles.controls}>
                 <button onClick={() => changeLanguage('pt')}>PT</button>
                 <button onClick={() => changeLanguage('en')}>EN</button>
-
                 <button
                     onClick={toggleTheme}
                     title={theme === 'light' ? t('change_to_dark_theme') : t('change_to_light_theme')}
                     className={styles.themeButton}
                 >
-                    {theme === 'light' ? 'tema escuro' : 'tema claro'}
+                    {theme === 'light' ? '🌙' : '☀️'}
                 </button>
 
                 <UserMenu />
