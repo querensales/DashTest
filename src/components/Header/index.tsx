@@ -28,7 +28,7 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
 
                 {hasSelection && (
                     <>
-                        <button onClick={onArchive}>
+                        <button className={styles.actionButton} onClick={onArchive}>
                             {t('archive')}
                         </button>
                         <span>{t('selected_items', { count: selectedItemsCount })}</span>
@@ -37,8 +37,10 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
             </div>
 
             <div className={styles.controls}>
-                <button onClick={() => changeLanguage('pt')}>PT</button>
-                <button onClick={() => changeLanguage('en')}>EN</button>
+                <button className={styles.actionButton} onClick={() => changeLanguage('pt')}>PT</button>
+                <button className={styles.actionButton} onClick={() => changeLanguage('en')}>EN</button>
+
+                <UserMenu />
                 <button
                     onClick={toggleTheme}
                     title={theme === 'light' ? t('change_to_dark_theme') : t('change_to_light_theme')}
@@ -46,8 +48,6 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
                 >
                     {theme === 'light' ? '🌙' : '☀️'}
                 </button>
-
-                <UserMenu />
             </div>
         </header>
     );
