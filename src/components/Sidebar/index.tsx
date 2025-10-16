@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import styles from './Sidebar.module.css';
 
-interface Menu {
-    id: number;
-    name: string;
-    subMenus: SubMenu[];
-}
 
 interface SubMenu {
     id: number;
     name: string;
+}
+
+interface Menu {
+    id: number;
+    name: string;
+    subMenus: SubMenu[];
 }
 
 interface SidebarProps {
@@ -20,12 +21,16 @@ interface SidebarProps {
 export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
     const [menus, setMenus] = useState<Menu[]>([]);
     const [loading, setLoading] = useState(true);
+    const [openMenuId, setOpenMenuId] = useState<number | null>(null);
 
     useEffect(() => {
         fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
-            .then(response => response.json())
-            .then(receivedMenus => {
-                setMenus(receivedMenus);
+            .then(res => res.json())
+            .then((data: Menu[]) => {
+                setMenus(data);
+                if (data && data.length > 0) {
+                    setOpenMenuId(data[0].id);
+                }
                 setLoading(false);
             })
             .catch(error => {
@@ -33,6 +38,10 @@ export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
                 setLoading(false);
             });
     }, []);
+
+    const handleMenuToggle = (menuId: number) => {
+        setOpenMenuId(prevOpenId => (prevOpenId === menuId ? null : menuId));
+    };
 
     if (loading) {
         return <aside className={styles.sidebar}>Carregando menus...</aside>;
@@ -42,28 +51,35 @@ export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
         <aside className={styles.sidebar}>
             <nav>
                 <ul>
-                    {menus.map(menu => (
-                        <li key={menu.id}>
-                            <span>{menu.name}</span>
-                            {menu.subMenus && (
-                                <ul>
-                                    {menu.subMenus.map(subMenu => {
-                                        const isSelected = selectedId === subMenu.id;
+                    {menus.map(menu => {
+                        const isMenuOpen = openMenuId === menu.id;
+                        return (
+                            <li key={menu.id}>
+                                <button className={styles.menuButton} onClick={() => handleMenuToggle(menu.id)}>
+                                    <span>{menu.name}</span>
+                                    <span className={styles.indicator}>{isMenuOpen ? '▲' : '▼'}</span>
+                                </button>
 
-                                        return (
-                                            <li key={subMenu.id}>
-                                                <button
-                                                    className={isSelected ? styles.selected : ''}
-                                                    onClick={() => onSubMenuClick(subMenu.id)}>
-                                                    {subMenu.name}
-                                                </button>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            )}
-                        </li>
-                    ))}
+                                {isMenuOpen && (
+                                    <ul>
+                                        {menu.subMenus.map(subMenu => {
+                                            const isSelected = selectedId === subMenu.id;
+                                            return (
+                                                <li key={subMenu.id}>
+                                                    <button
+                                                        onClick={() => onSubMenuClick(subMenu.id)}
+                                                        className={isSelected ? styles.selected : ''}
+                                                    >
+                                                        {subMenu.name}
+                                                    </button>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                            </li>
+                        );
+                    })}
                 </ul>
             </nav>
         </aside>
