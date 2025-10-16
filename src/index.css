@@ -1,6 +1,3 @@
-/* src/index.css */
-
-/* Definição das variáveis para o tema CLARO */
 body.light {
   --background-primary: #f0f2f5;
   --background-secondary: #ffffff; 
@@ -12,7 +9,6 @@ body.light {
   --accent-text-on-primary: #ffffff;
 }
 
-/* Definição das variáveis para o tema ESCURO  */
 body.dark {
   --background-primary: #212529;
   --background-secondary: #343a40;
