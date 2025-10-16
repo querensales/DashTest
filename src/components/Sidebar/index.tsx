@@ -23,13 +23,31 @@ export function Sidebar({ onSubMenuClick, selectedId, isOpen }: SidebarProps) {
     const [loading, setLoading] = useState(true);
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
 
+
     useEffect(() => {
         fetch('https://my-json-server.typicode.com/EnkiGroup/desafio-front-2025-2q/menus')
             .then(res => res.json())
             .then((data: Menu[]) => {
-                setMenus(data);
-                if (data && data.length > 0) {
-                    setOpenMenuId(data[0].id);
+                const promotedItems: Menu[] = [];
+
+                const originalMenusProcessed = data.map(menu => {
+                    if (menu.name === 'Conta 3') {
+                        const vipMenu = menu.subMenus.find(sm => sm.name === 'Vip');
+                        const lixoMenu = menu.subMenus.find(sm => sm.name === 'Lixo');                   
+                        if (vipMenu) promotedItems.push({ ...vipMenu, subMenus: [] });
+                        if (lixoMenu) promotedItems.push({ ...lixoMenu, subMenus: [] });
+                        return {
+                            ...menu,
+                            subMenus: menu.subMenus.filter(sm => sm.name !== 'Vip' && sm.name !== 'Lixo'),
+                        };
+                    }
+                    return menu;
+                });
+                
+                const finalMenuData = [...originalMenusProcessed, ...promotedItems];
+                setMenus(finalMenuData);
+                if (finalMenuData.length > 0) {
+                    setOpenMenuId(finalMenuData[0].id);
                 }
                 setLoading(false);
             })
@@ -44,14 +62,26 @@ export function Sidebar({ onSubMenuClick, selectedId, isOpen }: SidebarProps) {
     };
 
     if (loading) {
-        return <aside className={styles.sidebar}>Carregando menus...</aside>;
+        return <aside className={`${styles.sidebar} ${isOpen ? styles.isOpen : ''}`}>Carregando menus...</aside>;
     }
-
     return (
         <aside className={`${styles.sidebar} ${isOpen ? styles.isOpen : ''}`}>
             <nav>
                 <ul>
                     {menus.map(menu => {
+                        if (menu.subMenus.length === 0) {
+                            const isSelected = selectedId === menu.id;
+                            return (
+                                <li key={menu.id}>
+                                    <button
+                                        onClick={() => onSubMenuClick(menu.id)}
+                                        className={isSelected ? styles.selected : ''}
+                                    >
+                                        {menu.name}
+                                    </button>
+                                </li>
+                            );
+                        }                       
                         const isMenuOpen = openMenuId === menu.id;
                         return (
                             <li key={menu.id}>
