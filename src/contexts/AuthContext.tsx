@@ -12,8 +12,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // A lógica de login
   const login = useCallback((user: string, pass: string) => {
     if (user === 'Admin' && pass === 'Admin') {
       setIsAuthenticated(true);

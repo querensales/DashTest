@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
 import styles from './MainPage.module.css';
-
 import { Sidebar } from '../../components/Sidebar';
 import { ItemList } from '../../components/ItemList';
 import { Header } from '../../components/Header';
@@ -17,7 +15,6 @@ export function MainPage() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
 
   useEffect(() => {
     if (!selectedSubMenuId) {
@@ -47,7 +44,7 @@ export function MainPage() {
     });
   };
 
-  const archiveItems = () => {
+  const handleArchiveItems = () => {
     const remainingItems = items.filter(item => !selectedItems.includes(item.id));
     setItems(remainingItems);
     setSelectedItems([]);
@@ -55,20 +52,18 @@ export function MainPage() {
 
   return (
     <div className={styles.mainpageLayout}>
-
       <Sidebar 
         onSubMenuClick={setSelectedSubMenuId} 
         selectedId={selectedSubMenuId}
-        isOpen={isSidebarOpen} // Passa o estado de "aberto"
+        isOpen={isSidebarOpen}
       />
       {isSidebarOpen && <div className={styles.overlay} onClick={toggleSidebar} />}
       <main className={styles.contentArea}>
        <Header 
           selectedItemsCount={selectedItems.length}
           onArchive={handleArchiveItems}
-          onMenuClick={toggleSidebar} // Passa a função para o botão hambúrguer
+          onMenuClick={toggleSidebar}
         />
-
         <section className={styles.listSection}>
           <ItemList
             loading={loading}

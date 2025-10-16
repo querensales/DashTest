@@ -45,7 +45,7 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
                     title={theme === 'light' ? t('change_to_dark_theme') : t('change_to_light_theme')}
                     className={styles.themeButton}
                 >
-                    {theme === 'light' ? '🌙' : '☀️'}
+                    {theme === 'light' ? 'tema escuro' : 'tema claro'}
                 </button>
 
                 <UserMenu />
