@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Suspense } from 'react';
-
-import LoginPage from './pages/LoginPage/LoginPage.tsx';
+import './i18n';
+ 
+import { LoginPage } from './pages/LoginPage/LoginPage.tsx';
 import { MainPage } from './pages/MainPage/MainPage.tsx';
 
 import { AuthProvider } from './contexts/AuthContext.tsx';

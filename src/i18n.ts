@@ -15,7 +15,6 @@ const resources = {
 
   pt: {
     translation: {
-      
       "archive": "Arquivar",
       "selected_items": "{{count}} item(s) selecionado(s)",
       "change_to_dark_theme": "Mudar para Tema Escuro",
