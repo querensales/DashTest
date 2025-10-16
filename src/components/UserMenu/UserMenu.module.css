@@ -6,7 +6,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color:#00a884;
+  background-color: var(--accent-primary);
   color: var(--accent-text-on-primary);
   border: none;
   cursor: pointer;
@@ -14,7 +14,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+.menuContainer .userButton:hover {
+    opacity: 0.9;
 }
 
 .dropdownMenu {
@@ -27,6 +31,7 @@
   padding: 0.5rem;
   z-index: 10;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100px;
 }
 
 .dropdownMenu button {
@@ -36,5 +41,10 @@
   cursor: pointer;
   width: 100%;
   padding: 0.5rem;
-  text-align: center;
+  text-align: left; 
+  border-radius: 4px; 
+}
+
+.dropdownMenu button:hover {
+    background-color: var(--accent-light);
 }
