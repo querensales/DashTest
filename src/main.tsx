@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Suspense } from 'react';
 
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
 import { MainPage } from './pages/MainPage/MainPage.tsx';
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <Suspense fallback={<div>Carregando...</div>}></Suspense>
     <ThemeProvider>
       <AuthProvider>
         <RouterProvider router={router} />
