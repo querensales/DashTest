@@ -9,6 +9,7 @@ const resources = {
       "change_to_dark_theme": "Switch to Dark Theme",
       "change_to_light_theme": "Switch to Light Theme",
       "logout": "Logout",
+      "toggle_menu": "Toggle menu",
     }
   },
 
@@ -19,7 +20,8 @@ const resources = {
       "selected_items": "{{count}} item(s) selecionado(s)",
       "change_to_dark_theme": "Mudar para Tema Escuro",
       "change_to_light_theme": "Mudar para Tema Claro",
-      "logout": "Sair"
+      "logout": "Sair",
+      "toggle_menu": "Abrir/Fechar menu",
     }
   }
 };

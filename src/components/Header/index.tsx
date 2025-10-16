@@ -22,7 +22,7 @@ export function Header({ selectedItemsCount, onArchive, onMenuClick }: HeaderPro
     return (
         <header className={styles.header}>
             <div className={styles.leftSection}>
-                <button className={styles.hamburgerButton} onClick={onMenuClick}>
+                <button className={styles.hamburgerButton} onClick={onMenuClick} aria-label={t('menu')}>
                     ☰
                 </button>
 
