@@ -31,16 +31,22 @@
     overflow-y: auto;
 }
 
-@media (max-width: 768px) {
-  .mainpageLayout {
-    flex-direction: column;
-    height: auto;
-  }
 
-  .sidebar {
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+ 
+
+  .overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border-color); 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99; 
   }
 }

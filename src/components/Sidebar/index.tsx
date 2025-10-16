@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
 import styles from './Sidebar.module.css';
 
-
 interface SubMenu {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }
 
 interface Menu {
-    id: number;
-    name: string;
-    subMenus: SubMenu[];
+  id: number;
+  name: string;
+  subMenus: SubMenu[];
 }
 
 interface SidebarProps {
-    onSubMenuClick: (id: number) => void;
-    selectedId: number | null;
+  onSubMenuClick: (id: number) => void;
+  selectedId: number | null;
+  isOpen: boolean;
 }
 
-export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
+export function Sidebar({ onSubMenuClick, selectedId, isOpen }: SidebarProps) {
     const [menus, setMenus] = useState<Menu[]>([]);
     const [loading, setLoading] = useState(true);
     const [openMenuId, setOpenMenuId] = useState<number | null>(null);
@@ -48,7 +48,7 @@ export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
     }
 
     return (
-        <aside className={styles.sidebar}>
+        <aside className={`${styles.sidebar} ${isOpen ? styles.isOpen : ''}`}>
             <nav>
                 <ul>
                     {menus.map(menu => {
@@ -59,14 +59,14 @@ export function Sidebar({ onSubMenuClick, selectedId }: SidebarProps) {
                                     <span>{menu.name}</span>
                                     <span className={styles.indicator}>{isMenuOpen ? '▲' : '▼'}</span>
                                 </button>
-
+                                
                                 {isMenuOpen && (
                                     <ul>
                                         {menu.subMenus.map(subMenu => {
                                             const isSelected = selectedId === subMenu.id;
                                             return (
                                                 <li key={subMenu.id}>
-                                                    <button
+                                                    <button 
                                                         onClick={() => onSubMenuClick(subMenu.id)}
                                                         className={isSelected ? styles.selected : ''}
                                                     >
