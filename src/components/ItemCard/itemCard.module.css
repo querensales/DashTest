@@ -60,3 +60,19 @@
   width: 20px;
   margin: 0 14px;
 }
+
+@media (max-width: 768px) {
+  .subject {
+    white-space: normal;
+    max-width: 100%; 
+  }
+  .usersContainer {
+    display: none;
+  }
+
+  .ownerCircle {
+    min-width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}

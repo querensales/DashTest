@@ -12,6 +12,12 @@ export function MainPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(false);
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
 
   useEffect(() => {
     if (!selectedSubMenuId) {
@@ -50,12 +56,17 @@ export function MainPage() {
   return (
     <div className={styles.mainpageLayout}>
 
-      <Sidebar onSubMenuClick={setSelectedSubMenuId} selectedId={selectedSubMenuId} />
-
+      <Sidebar 
+        onSubMenuClick={setSelectedSubMenuId} 
+        selectedId={selectedSubMenuId}
+        isOpen={isSidebarOpen} // Passa o estado de "aberto"
+      />
+      {isSidebarOpen && <div className={styles.overlay} onClick={toggleSidebar} />}
       <main className={styles.contentArea}>
-        <Header
+       <Header 
           selectedItemsCount={selectedItems.length}
-          onArchive={archiveItems}
+          onArchive={handleArchiveItems}
+          onMenuClick={toggleSidebar} // Passa a função para o botão hambúrguer
         />
 
         <section className={styles.listSection}>

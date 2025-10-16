@@ -30,3 +30,17 @@
     padding: 1rem;
     overflow-y: auto;
 }
+
+@media (max-width: 768px) {
+  .mainpageLayout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color); 
+  }
+}
